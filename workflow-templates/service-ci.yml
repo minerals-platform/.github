@@ -1,0 +1,17 @@
+name: Service CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  container:
+    uses: minerals-platform/.github/.github/workflows/container-ci.yml@main
+    with:
+      image-name: REPLACE_ME
+    secrets: inherit

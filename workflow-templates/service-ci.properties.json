@@ -1,0 +1,6 @@
+{
+  "name": "Minerals Platform service CI",
+  "description": "Test, build, publish a SHA-tagged image, and trigger Coolify.",
+  "iconName": "octicon container",
+  "categories": ["Dockerfile"]
+}
