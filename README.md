@@ -6,9 +6,10 @@ repositories in the `minerals-platform` organization.
 ## Reusable container workflow
 
 Service repositories call `.github/workflows/container-ci.yml`. Pull requests
-build the image on a GitHub-hosted runner. Commits to `main` rebuild and publish
-the immutable `${GITHUB_SHA}` tag from the trusted self-hosted production runner,
-then optionally invoke a Coolify deploy webhook.
+build the image on the isolated organization runner. Commits to `main` rebuild
+and publish the immutable `${GITHUB_SHA}` tag from the same trusted runner, then
+optionally invoke a Coolify deploy webhook. The runner has no direct access to
+the production Docker roots or installed runtime configuration.
 
 Required organization/repository configuration:
 
@@ -16,7 +17,7 @@ Required organization/repository configuration:
 - secrets `REGISTRY_USERNAME` and `REGISTRY_PASSWORD`
 - variables `COOLIFY_URL` and `COOLIFY_APPLICATION_UUID` for each Docker Image application
 - optional secret `COOLIFY_TOKEN` with application update/deploy permissions
-- a self-hosted runner with labels `linux`, `x64`, and `minerals-production`
+- a self-hosted runner with labels `linux`, `x64`, and `minerals-ci`
 - a protected `production` environment in every deployable repository
 
 The runner must be assigned only to a runner group that allows selected trusted
